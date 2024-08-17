@@ -1,9 +1,10 @@
 import React from "react";
-import  "./Header.css";
-import './Footer.css'
+import "./Header.css";
+import "./Footer.css";
+import seriesData from "../Api/seriesData.json";
 
 // Define NetFlixSeries before App
- export const NetFlixSeries = () => {
+export const NetFlixSeries = () => {
   const name = "Queen of Tears...!";
   const rating = 8.5;
   const summary = (
@@ -22,37 +23,50 @@ import './Footer.css'
     </p>
   );
 
-  const returnGenre =()=>{
+  const returnGenre = () => {
     const Genre = "RomCom";
     return Genre;
-  }
+  };
 
   let age = 19;
 
-
-  // let canWatch = "Not Available";
-  // if (age >= 18) canWatch = "Watch Now";
-
-  const canWatch = ()=>{
+  const canWatch = () => {
     if (age >= 18) return "Watch Now";
-    return "Not Available....!"
-  }
-  
-
+    return "Not Available....!";
+  };
 
   return (
     <div>
-      <img src="princes.jpg" alt="queen1.jpg" height={1000} width={1520} />
-      <h2>Name: {name}</h2>
-      <h3>Rating: {15+3.5}</h3>
-      <p>Summary: {summary}</p>
-      <p>Genre:{returnGenre()}</p>
-      {/* <button>{age >= 10 ? "Watch Now" : "Not Available...!"}</button> */}
+      <div>
+        <img src="princes.jpg" alt="queen1.jpg" height="150%" width="100%" />
+        <h2>Name: {name}</h2>
+        <h3>Rating: {rating}</h3>
+        <p>Summary: {summary}</p>
+        <p>Genre: {returnGenre()}</p>
+        <button>{canWatch()}</button>
+      </div>
 
-      {/* <button>{canWatch}</button> */}
-      <button>{canWatch()}</button>
-
-
+      <div>
+        <ul>
+          {seriesData.map((currentElem) => {
+            return (
+              <li key={currentElem.id}>
+                <div>
+                  <img src={currentElem.img_url} alt={currentElem.name} height="150%" width="100%"  />
+                  <h2>Name: {currentElem.name}</h2>
+                  <h3>Rating: {currentElem.rating}</h3>
+                  <p>Summary: {currentElem.description}</p>
+                  <p>Genre: {currentElem.genre}</p>
+                  <p>Cast: {currentElem.cast}</p>
+                  <a href={currentElem.watch_url} target="_blank" rel="noopener noreferrer">
+                    <button>Watch Now</button>
+                  </a>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
     </div>
   );
 };
@@ -71,33 +85,27 @@ export const App = () => {
   );
 };
 
-
-// export default NetFlixSeries;
-
-
- export const Footer = () => {
-    return (
-      <footer className="footer">
-        <div className="social-media">
-          <a href="#"><img src="/facebooks.png" alt="Facebook" height="70%" width="40%" /></a>
-          <a href="#"><img src="/twitter.png" alt="Twitter" /></a>
-          <a href="#"><img src="/insta1.png" alt="Instagram" /></a>
-          <a href="#"><img src="/youtube.png" alt="YouTube" height="70%" width="40%" /></a>
-        </div>
-        <div className="legal-links">
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms of Service</a>
-          <a href="#">Contact Us</a>
-          <a href="#">FAQ</a>
-        </div>
-        <div className="copyright">
-          &copy; 2024 Netflix Series WebApp. All rights reserved.
-        </div>
-      </footer>
-    );
-  };
-
-
+export const Footer = () => {
+  return (
+    <footer className="footer">
+      <div className="social-media">
+        <a href="#"><img src="/facebooks.png" alt="Facebook" height="70%" width="40%" /></a>
+        <a href="#"><img src="/twitter.png" alt="Twitter" /></a>
+        <a href="#"><img src="/insta1.png" alt="Instagram" /></a>
+        <a href="#"><img src="/youtube.png" alt="YouTube" height="70%" width="40%" /></a>
+      </div>
+      <div className="legal-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Contact Us</a>
+        <a href="#">FAQ</a>
+      </div>
+      <div className="copyright">
+        &copy; 2024 Netflix Series WebApp. All rights reserved.
+      </div>
+    </footer>
+  );
+};
 
 export const Header = () => {
   return (
@@ -120,5 +128,3 @@ export const Header = () => {
     </header>
   );
 };
-
-
