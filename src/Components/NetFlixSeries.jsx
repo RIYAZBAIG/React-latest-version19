@@ -2,6 +2,7 @@ import React from "react";
 import "./Header.css";
 import "./Footer.css";
 import seriesData from "../Api/seriesData.json";
+import SeriesLists from "./SeriesLists";
 
 // Define NetFlixSeries before App
 export const NetFlixSeries = () => {
@@ -24,8 +25,7 @@ export const NetFlixSeries = () => {
   );
 
   const returnGenre = () => {
-    const Genre = "RomCom";
-    return Genre;
+    return "RomCom";
   };
 
   let age = 19;
@@ -38,33 +38,19 @@ export const NetFlixSeries = () => {
   return (
     <div>
       <div>
-        <img src="princes.jpg" alt="queen1.jpg" height="150%" width="100%" />
+        <img src="princes.jpg" alt="Queen of Tears" height="150%" width="100%" />
         <h2>Name: {name}</h2>
         <h3>Rating: {rating}</h3>
-        <p>Summary: {summary}</p>
+        <div>Summary: {summary}</div>
         <p>Genre: {returnGenre()}</p>
         <button>{canWatch()}</button>
       </div>
 
       <div>
         <ul>
-          {seriesData.map((currentElem) => {
-            return (
-              <li key={currentElem.id}>
-                <div>
-                  <img src={currentElem.img_url} alt={currentElem.name} height="150%" width="100%"  />
-                  <h2>Name: {currentElem.name}</h2>
-                  <h3>Rating: {currentElem.rating}</h3>
-                  <p>Summary: {currentElem.description}</p>
-                  <p>Genre: {currentElem.genre}</p>
-                  <p>Cast: {currentElem.cast}</p>
-                  <a href={currentElem.watch_url} target="_blank" rel="noopener noreferrer">
-                    <button>Watch Now</button>
-                  </a>
-                </div>
-              </li>
-            );
-          })}
+          {seriesData.map((currentElem) => (
+            <SeriesLists key={currentElem.id} currentElem={currentElem} />
+          ))}
         </ul>
       </div>
     </div>
